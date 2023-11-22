@@ -73,3 +73,14 @@ User 6 did not request any confirmation messages. The confirmation rate is 0.
 User 3 made 2 requests and both timed out. The confirmation rate is 0.
 User 7 made 3 requests and all were confirmed. The confirmation rate is 1.
 User 2 made 2 requests where one was confirmed and the other timed out. The confirmation rate is 1 / 2 = 0.5.
+###############################################################################################################
+###############################################################################################################
+Solution 
+###############################################################################################################
+###############################################################################################################
+# Write your MySQL query statement below
+Select S.user_id, Round(Avg(If(C.action= "Confirmed" ,1,0)),2) as confirmation_rate 
+From Signups S 
+Left Join Confirmations C
+On S.User_id = C.User_ID
+Group by User_ID
