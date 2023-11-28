@@ -1,0 +1,14 @@
+WITH CTE(task_id, subtasks_count) AS (
+    SELECT task_id, subtasks_count
+    FROM Tasks
+    UNION ALL
+    SELECT task_id, subtasks_count-1 as subtasks_count
+    FROM CTE
+    WHERE subtasks_count > 1
+)
+
+SELECT task_id, subtasks_count as subtask_id
+FROM CTE 
+minus
+select *
+from executed
